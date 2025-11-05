@@ -1,6 +1,10 @@
 
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wasalnyy.DAL.Database;
+using Wasalnyy.DAL.Entities;
+using Wasalnyy.PL.Hubs;
 
 namespace Wasalnyy.PL
 {
@@ -13,11 +17,26 @@ namespace Wasalnyy.PL
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddSignalR();
 
             var connectionString = builder.Configuration.GetConnectionString("TemplateConnection");
 
             builder.Services.AddDbContext<WasalnyyDbContext>(options =>
             options.UseSqlServer(connectionString));
+           
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+             options =>
+    {
+             options.LoginPath = new PathString("/Account/Login");
+             options.AccessDeniedPath = new PathString("/Account/Login");
+             });
+
+
+
+            builder.Services.AddIdentityCore<WasalnyyDbContext>(options => options.SignIn.RequireConfirmedAccount = true)
+                            .AddEntityFrameworkStores<WasalnyyDbContext>()
+                            .AddTokenProvider<DataProtectorTokenProvider<Riders>>(TokenOptions.DefaultProvider);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -34,7 +53,9 @@ namespace Wasalnyy.PL
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.MapHub<RideHub>("/ride");
 
 
             app.MapControllers();
