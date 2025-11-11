@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wasalnyy.DAL.Enum;
-
-namespace Wasalnyy.DAL.Entities
+﻿namespace Wasalnyy.DAL.Entities
 {
 	public class Trip
 	{
@@ -20,6 +12,7 @@ namespace Wasalnyy.DAL.Entities
 		public DateTime RequestedDate { get; set; }
 		public DateTime? StartDate { get; set; }
         public DateTime? ArrivalDate { get; set; }
+
 
         public Coordinates PickupCoordinates { get; set; }
         public Coordinates DistinationCoordinates { get; set; }
