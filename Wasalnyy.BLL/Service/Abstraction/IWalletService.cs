@@ -20,5 +20,7 @@ namespace Wasalnyy.BLL.Service.Abstraction
         Task<TransferWalletResponse> HandleTransferWalletMoneyFromRiderToDriver(TransferMoneyBetweenUsersDTO transferDto);
 
         Task<bool> CheckUserBalanceAsync(string userId, decimal amount);
-    }
+        Task CreateWalletForUserAsync(User user);
+
+	}
 }

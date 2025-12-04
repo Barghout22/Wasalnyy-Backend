@@ -72,7 +72,7 @@ namespace Wasalnyy.BLL.Common
             services.AddSingleton<DriverEvents>();
             services.AddSingleton<TripEvents>();
             services.AddSingleton<WasalnyyHubEvents>();
-            services.AddSingleton<IFaceService, FaceService>();
+            services.AddScoped<IFaceService, FaceService>();
 
 
 			services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
