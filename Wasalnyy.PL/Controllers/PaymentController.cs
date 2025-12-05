@@ -54,7 +54,7 @@ namespace Wasalnyy.PL.Controllers
                 return BadRequest("Payment status must be either (1) for Success or (0) for Fail.");
             }
 
-            // Call business layer
+          
             var result = await _paymentService.HandleRiderPayment(
                 new RiderPaymentDetailsDTO
                 {

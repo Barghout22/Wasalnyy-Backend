@@ -95,7 +95,7 @@
 				default:
 					break;
 			}
-			await _hubContext.Clients.Group("admins").SendAsync("tripCanceled", dto.Id);
+			await _hubContext.Clients.Group("Admins").SendAsync("tripCanceled", dto.Id);
 		}
 
 		public async Task OnTripEnded(TripDto dto)
@@ -117,7 +117,7 @@
 
 				}
 			}
-			await _hubContext.Clients.Group("admins").SendAsync("tripEnded", dto.Id);
+			await _hubContext.Clients.Group("Admins").SendAsync("tripEnded", dto.Id);
 		}
 
 		public async Task OnTripStarted(TripDto dto)
